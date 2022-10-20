@@ -1,37 +1,37 @@
 # **NetsJS Example 1**
 
-## **Descrição**
+## **Description**
 
 Academic work of the subject Building Applications Using Frameworks
 
-## **Configuração de ambiente**
+## **Environment configuration**
 
-### **Configurar versão do NodeJS**
-Rode o seguinte comando para pegar a versão correta do NodeJS que o projeto usa: 
+### **NodeJS Version**
+Run the following command to get the correct version of NodeJS that the project uses:
 ```bash
 $ nvm use
 ```
 
-Caso não tenha essas `versão do NodeJS` instalado rode seguinte o comando: 
+If you don't have these `version of NodeJS` installed, run the following command:
 ```bash
 $ nvm install lts/gallium
 ```
 
-### **Instalar dependências**
-Rode o seguinte comando para instalar as dependências necessárias: 
+### **Dependencies**
+Run the following command to install the required dependencies:
 ```bash
 $ yarn
 ```
 
-Caso não tenha `yarn` instalado rode o seguinte comando:
+If you don't have `yarn` installed, run the following command:
 ```bash
 $ npm i -g yarn
 ```
 
-## **Iniciar o projeto**
+## **Start the project**
 
 ### **Docker**
-Para iniciar o projeto com `docker` rode o seguinte comando: 
+To start the project with `docker`, run the following command:
 ```bash
 $ docker-compose up -d app
 ```
