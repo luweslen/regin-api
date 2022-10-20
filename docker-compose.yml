@@ -1,0 +1,52 @@
+version: '3'
+
+volumes:
+  nestjs-example-1-redis:
+    driver: local
+  nestjs-example-1-mongo:
+
+services:
+  base: &base
+    hostname: base
+    image: nestjs-example-1
+    ports: []
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - .:/home/node/app
+
+  mongo:
+    hostname: mongo
+    image: mongo:4.2.9
+    volumes:
+      - nestjs-example-1-mongo:/data/db
+    ports:
+      - '27017:27017'
+
+  app: &app
+    <<: *base
+    hostname: app
+    command: yarn start:dev
+    env_file:
+      - ./.env.development
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+
+  specs:
+    <<: *base
+    command: yarn test
+    env_file:
+      - ./.env.development
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+
+  lint:
+    <<: *base
+    command: yarn lint

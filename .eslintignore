@@ -1,0 +1,10 @@
+/old
+/coverage
+/scripts
+/bin/deploy.js
+/dist
+.eslintrc.js
+/*.js
+node_modules
+dist
+
