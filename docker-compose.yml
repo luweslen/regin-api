@@ -1,14 +1,16 @@
 version: '3'
 
 volumes:
-  nestjs-example-1-redis:
+  nestjs-example-redis:
     driver: local
-  nestjs-example-1-mongo:
+  nestjs-example-mongo:
+
 
 services:
-  base: &base
+  base:
+    &base
     hostname: base
-    image: nestjs-example-1
+    image: nestjs-example
     ports: []
     stdin_open: true
     tty: true
@@ -22,11 +24,12 @@ services:
     hostname: mongo
     image: mongo:4.2.9
     volumes:
-      - nestjs-example-1-mongo:/data/db
+      - nestjs-example-mongo:/data/db
     ports:
       - '27017:27017'
 
-  app: &app
+  app:
+    &app
     <<: *base
     hostname: app
     command: yarn start:dev

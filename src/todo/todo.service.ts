@@ -1,41 +1,44 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
-import { Todo, TodoDocument } from './entities/todo.entity';
+import { Todo, Prisma } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class TodoService {
-  constructor(@InjectModel(Todo.name) private TodoModel: Model<TodoDocument>) {}
+  constructor(private prisma: PrismaService) {}
 
-  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
-    const createdTodo = new this.TodoModel(createTodoDto);
-    return createdTodo.save();
+  async create(data: Prisma.TodoCreateInput): Promise<Todo> {
+    return this.prisma.todo.create({ data });
   }
 
   async findAll(): Promise<Todo[]> {
-    return this.TodoModel.find().exec();
+    return this.prisma.todo.findMany();
   }
 
   findByDone(done: boolean) {
-    return this.TodoModel.findOne({ done });
+    return this.prisma.todo.findUnique({
+      where: {},
+      select: {
+        done,
+      },
+    });
   }
 
   findOne(id: string) {
-    return this.TodoModel.findOne({ id });
+    return this.prisma.todo.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: string, updateTodoDto: UpdateTodoDto) {
-    return this.TodoModel.findByIdAndUpdate(
-      id,
-      { $set: updateTodoDto },
-      { new: true },
-    );
+  update(id: string, data: Prisma.TodoUpdateArgs) {
+    return this.prisma.todo.update({
+      data,
+      where: { id },
+    });
   }
 
   remove(id: string) {
-    return this.TodoModel.deleteOne({ _id: id }).exec();
+    return this.prisma.todo.delete({
+      where: { id },
+    });
   }
 }
