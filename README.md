@@ -36,6 +36,7 @@ This project was developed with the following technologies:
 - TypeScript
 - Prisma
 - MongoDB
+- Docker
 
 <a id="-how-to-use"></a>
 
