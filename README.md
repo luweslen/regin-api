@@ -44,7 +44,7 @@ This project was developed with the following technologies:
 
 Follow the steps below to run this project
 
-- Clone o repository with `git clone https://github.com/luweslen/regin-api`;
+- Clone o repository with `git clone https://github.com/luweslen/regin-api`
 - Go to directory backend with `cd regin-api`
 - Run the following command to get the correct version of NodeJS that the project uses:
   ```bash
